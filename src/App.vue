@@ -74,7 +74,6 @@
 
       <div class="footer-bottom">
         <p class="copyright">© 2025 Palette Generator. Все права защищены.</p>
-        <p class="footer-info">Создано с ❤️ для дизайнеров и разработчиков</p>
       </div>
     </footer>
   </div>
@@ -277,25 +276,45 @@ export default {
 
 /* ===== ФУТЕР ===== */
 .app-footer {
-  background: var(--bg-tertiary);
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, color-mix(in srgb, var(--bg-tertiary) 95%, var(--accent-color)) 100%);
   border-top: 1px solid var(--border-color);
-  padding: 3rem 0 1.5rem;
+  padding: 4rem 0 2rem;
   margin-top: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1024px) {
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
+  }
+  
+  .footer-section:first-child {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-right: 0;
   }
 }
 
@@ -308,105 +327,232 @@ export default {
 }
 
 /* Логотип и описание */
-.footer-section:first-child {
-  padding-right: 1rem;
-}
-
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 70%, white));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .footer-logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
 }
 
 .footer-description {
   color: var(--text-secondary);
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-  max-width: 320px;
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  max-width: 340px;
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.footer-description::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: -3px;
+  width: 30px;
+  height: 2px;
+  background: var(--accent-color);
+  opacity: 0.5;
 }
 
 /* Заголовки секций */
 .footer-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 2px;
 }
 
 /* Ссылки */
 .footer-links {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.875rem;
 }
 
 .footer-link {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.875rem;
   color: var(--text-secondary);
   text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-color) 0%, transparent 100%);
+  opacity: 0.1;
+  transition: width 0.3s ease;
 }
 
 .footer-link:hover {
   background: var(--bg-secondary);
+  color: var(--text-primary);
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.footer-link:hover::before {
+  width: 100%;
+}
+
+.footer-link-icon {
   color: var(--accent-color);
+  font-size: 1.125rem;
+  transition: transform 0.3s ease;
+  min-width: 20px;
+}
+
+.footer-link:hover .footer-link-icon {
+  transform: scale(1.2);
 }
 
 .footer-link.router-link-active {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 80%, white));
   color: white;
-  font-weight: 500;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(var(--accent-color-rgb, 0, 0, 0), 0.2);
 }
 
+/* Футер (нижняя часть) */
 .footer-bottom {
-  max-width: 1200px;
-  margin: 2rem auto 0;
-  padding: 1.5rem 2rem 0;
+  max-width: 1280px;
+  margin: 3rem auto 0;
+  padding: 2rem 2rem 0;
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.footer-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 2px;
+  opacity: 0.5;
 }
 
 .copyright {
   color: var(--text-tertiary);
   font-size: 0.875rem;
-  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copyright::before {
+  content: '©';
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
 .footer-info {
   color: var(--text-tertiary);
   font-size: 0.875rem;
-  font-style: italic;
-  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
 }
 
 @media (max-width: 768px) {
+  .app-footer {
+    padding: 3rem 0 1.5rem;
+  }
+  
   .footer-bottom {
     flex-direction: column;
     text-align: center;
-    gap: 0.75rem;
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+  
+  .footer-info {
+    order: -1;
+  }
+  
+  .footer-description {
+    padding-left: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Анимация появления */
+.app-footer {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
